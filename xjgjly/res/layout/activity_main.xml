@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <FrameLayout
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/logo_lib_topbar" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_vertical"
+                    android:text="@string/logo_topbar_settings" />
+            </FrameLayout>
+
+            <View style="@style/divHorizontal" />
+
+            <FrameLayout
+                android:id="@+id/contain"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            
+             <View style="@style/divHorizontal" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:gravity="bottom"
+                android:orientation="horizontal" >
+               
+                <RadioButton
+                    android:id="@+id/bottom_ly_home"
+                    style="@style/BottomBarBtn"
+                    android:drawableTop="@drawable/bottom_ly_ic_home"
+                    android:text="首页" />
+
+                <RadioButton
+                    android:id="@+id/bottom_ly_video"
+                    style="@style/BottomBarBtn"
+                    android:drawableTop="@drawable/bottom_ly_ic_video"
+                    android:text="微电影" />
+
+                <RadioButton
+                    android:id="@+id/bottom_ly_img"
+                    style="@style/BottomBarBtn"
+                    android:drawableTop="@drawable/bottom_ly_ic_img"
+                    android:text="摄影作品" />
+
+
+                <RadioButton
+                    android:id="@+id/bottom_ly_info"
+                    style="@style/BottomBarBtn"
+                    android:drawableTop="@drawable/bottom_ly_ic_info"
+                    android:text="通知" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</android.support.v4.widget.DrawerLayout><!-- </android.support.v4.widget.DrawerLayout> -->

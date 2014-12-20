@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+   <me.xiaopan.android.spear.widget.SpearImageView
+	    android:id="@+id/video_ly_list_item_img"
+	    android:layout_width="130dp"
+	    android:layout_height="72dp"
+	    android:scaleType="centerCrop"
+	    android:contentDescription="@string/app_name"/>
+	    <TextView 
+	        android:id="@+id/video_ly_list_item_name"
+	        android:text="model"
+	        android:textColor="@android:color/darker_gray"
+	        android:textSize="13sp"
+	        android:textStyle="bold"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"/>
+
+</LinearLayout>

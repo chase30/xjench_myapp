@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ppv="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" 
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <me.xiaopan.android.spear.widget.SpearImageView
+            android:id="@+id/image_gridItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop" />
+
+        <me.xiaopan.android.spear.sample.widget.ProgressPieView
+            android:id="@+id/progress_gridItem_progress"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            ppv:backgroundColor="#D1D1D1"
+            ppv:progressColor="#EE7942"
+            ppv:progressFillType="center"
+            ppv:strokeColor="#A8A8A8"
+            ppv:strokeWidth="2dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/xj_writer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="董博作品" 
+        android:layout_marginTop="6dp"
+        />
+	
+</LinearLayout>
