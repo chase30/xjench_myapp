@@ -3,6 +3,9 @@ package xjgjly.lib.com.fragment.main;
 import java.net.URLEncoder;
 import java.util.List;
 
+import me.xiaopan.android.spear.widget.SpearImageView;
+
+import com.fax.utils.bitmap.BitmapManager;
 import com.fax.utils.http.HttpUtils;
 import com.fax.utils.task.ResultAsyncTask;
 import com.google.gson.Gson;
@@ -12,6 +15,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +38,8 @@ public class InfoFragment extends MyFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
+		
+		view = inflater.inflate(R.layout.info_ly_list, container, false);
 		new ResultAsyncTask<DedeMegagameinfoEntity>(context) {
 			@Override
 			protected DedeMegagameinfoEntity doInBackground(Void... params) {
@@ -49,38 +55,43 @@ public class InfoFragment extends MyFragment{
 				return null;
 			}
 			@Override
-			protected void onPostExecuteSuc(DedeMegagameinfoEntity dedea) {
-				if(dedea!=null){
-					if(InfoFragment.this.OnCheck()==true){
-/*						wv = (WebView) view.findViewById(R.id.webView);
-						WebSettings settings=wv.getSettings();
-						settings.setPluginState(PluginState.ON);
-						settings.setJavaScriptCanOpenWindowsAutomatically(true);
-						settings.setJavaScriptEnabled(true);
-//						wv.setWebViewClient(new WebViewClientDemo());
-						wv.loadUrl(dedea.getBody());*/
-						
-						
-						      String urlen=URLEncoder.encode(dedea.getVideosrc());
-						      Uri CONTENT_URI_BROWSERS = Uri.parse(MyApp.Host+"dedeArchivesController.do?videohtml&url="+urlen);
-						      Intent  intent = new  Intent(Intent.ACTION_VIEW, CONTENT_URI_BROWSERS);
-						      startActivity(intent);
-						      startActivity(intent);
-					}else {MyApp.installFlashApkShowDialog(context);}
-				
+			protected void onPostExecuteSuc(final DedeMegagameinfoEntity dedea) {
+				if(dedea.getVideosrc().equals("")){
+				    view.findViewById(R.id.wu).setVisibility(View.VISIBLE);
 				}else{
-					Toast.makeText(context, "大赛通知暂时还没公布，敬请期待", Toast.LENGTH_SHORT).show();
+					view.findViewById(R.id.you).setVisibility(View.VISIBLE);
+					SpearImageView imageview=(SpearImageView) view.findViewById(R.id.img);
+					BitmapManager.bindView(imageview,dedea.getImg());
+					view.findViewById(R.id.you).setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if(dedea!=null){
+								if(InfoFragment.this.OnCheck()==true){
+			/*						wv = (WebView) view.findViewById(R.id.webView);
+									WebSettings settings=wv.getSettings();
+									settings.setPluginState(PluginState.ON);
+									settings.setJavaScriptCanOpenWindowsAutomatically(true);
+									settings.setJavaScriptEnabled(true);
+//									wv.setWebViewClient(new WebViewClientDemo());
+									wv.loadUrl(dedea.getBody());*/
+									
+									
+									      String urlen=URLEncoder.encode(dedea.getVideosrc());
+									      Uri CONTENT_URI_BROWSERS = Uri.parse(MyApp.Host+"dedeArchivesController.do?videohtml&url="+urlen);
+									      Intent  intent = new  Intent(Intent.ACTION_VIEW, CONTENT_URI_BROWSERS);
+									      startActivity(intent);
+								}else {MyApp.installFlashApkShowDialog(context);}
+							
+							}else{
+								Toast.makeText(context, "大赛通知暂时还没公布，敬请期待", Toast.LENGTH_SHORT).show();
+							}
+						}
+					});
+					
 				}
+				
 			}
 		}.setProgressDialog().execute();
-		if(json==null){
-		view = inflater.inflate(R.layout.info_ly_list, container, false);
-		
-		}else
-		{
-			 view = inflater.inflate(R.layout.info_ly_list, container, false);
-		}
-	
 		
 		return new MyTopBar(getActivity()).setTitle("大赛通知").setContentView(view);
 	}
