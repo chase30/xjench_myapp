@@ -18,7 +18,6 @@ import xjgjly.lib.com.model.DedeUploadsEntity;
 import xjgjly.lib.com.views.MyTopBar;
 
 /**
- * TODO
  * 作品详情 */
 
 public class imagedetailFragment extends MyFragment{

@@ -44,7 +44,7 @@ import xjgjly.lib.com.model.DedeUploadsEntity;
 import xjgjly.lib.com.views.MyTopBar;
 
 /**
- * TODO 摄影作品页卡
+ * 摄影作品页卡
  */
 
 public class ImagesFragment extends MyFragment {

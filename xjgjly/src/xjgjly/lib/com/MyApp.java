@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -114,6 +115,33 @@ public class MyApp extends Application {
 	public static SharedPreferences getDefaultSp(){
 		return PreferenceManager.getDefaultSharedPreferences(myApp);
 	}
+	
+	/**
+	 * 判断是否安装ADOBE FLASH PLAYER插件
+	 * 
+	 * @return
+	 */
+	private static Context context;
+	private static boolean hasAdobePlayer = false;// ADOBE FLASH PLAYER插件安装状态
+	public static boolean OnCheck() {
+		// 判断是否安装ADOBE FLASH PLAYER插件
+		PackageManager pm = context.getPackageManager();
+		List<PackageInfo> lsPackageInfo = pm.getInstalledPackages(0);
+
+		for (PackageInfo pi : lsPackageInfo) {
+			if (pi.packageName.contains("com.adobe.flashplayer")) {
+				hasAdobePlayer = true;
+				break;
+			}
+		}
+		// 如果插件安装一切正常
+		if (hasAdobePlayer == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * 判断是否已经写入过这个key，没写入就现在写入
 	 * @param key 值

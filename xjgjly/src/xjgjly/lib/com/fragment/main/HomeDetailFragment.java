@@ -28,7 +28,6 @@ import xjgjly.lib.com.model.DedeArchivesEntityList.DedeArchivesEntity;
 import xjgjly.lib.com.views.MyTopBar;
 
 /**
- * TODO
  * 旅游广告页卡*/
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -52,7 +51,7 @@ public class HomeDetailFragment extends MyFragment{
 			@Override
 			protected void onPostExecuteSuc(DedeAddonarticleEntity dedea) {
 				if(dedea.getBody()!=null){
-					if(OnCheck()==true){
+					if(MyApp.OnCheck()==true){
 /*						wv = (WebView) view.findViewById(R.id.webView);
 						WebSettings settings=wv.getSettings();
 						settings.setPluginState(PluginState.ON);
@@ -61,7 +60,7 @@ public class HomeDetailFragment extends MyFragment{
 //						wv.setWebViewClient(new WebViewClientDemo());
 						wv.loadUrl(dedea.getBody());*/
 						
-						   Intent intent=new Intent();
+						      Intent intent=new Intent();
 						      intent.setAction("android.intent.action.VIEW");
 						      String urlen=URLEncoder.encode(dedea.getBody());
 						      
@@ -92,28 +91,5 @@ public class HomeDetailFragment extends MyFragment{
             return true;  
         }  
     }  
-	/**
-	 * 判断是否安装ADOBE FLASH PLAYER插件
-	 * 
-	 * @return
-	 */
-	private boolean hasAdobePlayer = false;// ADOBE FLASH PLAYER插件安装状态
-	public boolean OnCheck() {
-		// 判断是否安装ADOBE FLASH PLAYER插件
-		PackageManager pm = context.getPackageManager();
-		List<PackageInfo> lsPackageInfo = pm.getInstalledPackages(0);
-
-		for (PackageInfo pi : lsPackageInfo) {
-			if (pi.packageName.contains("com.adobe.flashplayer")) {
-				hasAdobePlayer = true;
-				break;
-			}
-		}
-		// 如果插件安装一切正常
-		if (hasAdobePlayer == true) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 }

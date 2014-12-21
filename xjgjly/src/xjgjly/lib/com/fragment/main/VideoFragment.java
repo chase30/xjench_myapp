@@ -21,7 +21,6 @@ import xjgjly.lib.com.model.DedeArchivesEntityList.DedeArchivesEntity;
 import xjgjly.lib.com.views.MyTopBar;
 
 /**
- * TODO
  * 微电影页卡*/
 
 public class VideoFragment extends MyFragment{

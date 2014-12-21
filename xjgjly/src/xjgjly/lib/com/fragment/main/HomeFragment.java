@@ -28,7 +28,6 @@ import xjgjly.lib.com.model.DedeArchivesEntityList;
 import xjgjly.lib.com.model.DedeArchivesEntityList.DedeArchivesEntity;
 
 /**
- * TODO
  * 首页 页卡 */
 
 public class HomeFragment extends MyFragment{
