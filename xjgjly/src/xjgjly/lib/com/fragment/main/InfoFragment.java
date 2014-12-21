@@ -15,11 +15,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import xjgjly.lib.com.MyApp;
 import xjgjly.lib.com.MyFragment;
 import xjgjly.lib.com.R;
-import xjgjly.lib.com.model.DedeAddonarticleEntity;
+import xjgjly.lib.com.model.DedeMegagameinfoEntity;
 import xjgjly.lib.com.views.MyTopBar;
 
 /**
@@ -29,24 +30,28 @@ import xjgjly.lib.com.views.MyTopBar;
 public class InfoFragment extends MyFragment{
 	String json;
 	View view;
+	TextView textview1;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		new ResultAsyncTask<DedeAddonarticleEntity>(context) {
+		new ResultAsyncTask<DedeMegagameinfoEntity>(context) {
 			@Override
-			protected DedeAddonarticleEntity doInBackground(Void... params) {
-				String url =MyApp.Host;//TODO
+			protected DedeMegagameinfoEntity doInBackground(Void... params) {
+				String url =MyApp.Host+"dedeArchivesController.do?getmessage";//TODO
 				json=HttpUtils.reqForGet(url);
+				if(json==null){
+					return null;
+				}
 				try {
-					return new Gson().fromJson(json, DedeAddonarticleEntity.class);
+					return new Gson().fromJson(json, DedeMegagameinfoEntity.class);
 				} catch (Exception e) {
 				}
 				return null;
 			}
 			@Override
-			protected void onPostExecuteSuc(DedeAddonarticleEntity dedea) {
-				if(dedea.getBody()!=null){
-					if(MyApp.OnCheck()==true){
+			protected void onPostExecuteSuc(DedeMegagameinfoEntity dedea) {
+				if(dedea!=null){
+					if(InfoFragment.this.OnCheck()==true){
 /*						wv = (WebView) view.findViewById(R.id.webView);
 						WebSettings settings=wv.getSettings();
 						settings.setPluginState(PluginState.ON);
@@ -54,25 +59,51 @@ public class InfoFragment extends MyFragment{
 						settings.setJavaScriptEnabled(true);
 //						wv.setWebViewClient(new WebViewClientDemo());
 						wv.loadUrl(dedea.getBody());*/
-						      Intent intent=new Intent();
-						      intent.setAction("android.intent.action.VIEW");
-						      String urlen=URLEncoder.encode(dedea.getBody());
-						      
+						
+						
+						      String urlen=URLEncoder.encode(dedea.getVideosrc());
 						      Uri CONTENT_URI_BROWSERS = Uri.parse(MyApp.Host+"dedeArchivesController.do?videohtml&url="+urlen);
-						      intent.setData(CONTENT_URI_BROWSERS);
-						      intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
+						      Intent  intent = new  Intent(Intent.ACTION_VIEW, CONTENT_URI_BROWSERS);
+						      startActivity(intent);
 						      startActivity(intent);
 					}else {MyApp.installFlashApkShowDialog(context);}
-					backStack();
+				
 				}else{
-					Toast.makeText(context, "暂记录", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "大赛通知暂时还没公布，敬请期待", Toast.LENGTH_SHORT).show();
 				}
 			}
 		}.setProgressDialog().execute();
 		if(json==null){
 		view = inflater.inflate(R.layout.info_ly_list, container, false);
-		}else view = inflater.inflate(R.layout.home_ly_list_item_detail, container, false);
+		
+		}else
+		{
+			 view = inflater.inflate(R.layout.info_ly_list, container, false);
+		}
+	
+		
 		return new MyTopBar(getActivity()).setTitle("大赛通知").setContentView(view);
 	}
+	
+	private  boolean hasAdobePlayer = false;// ADOBE FLASH PLAYER插件安装状态
+	public  boolean OnCheck() {
+		// 判断是否安装ADOBE FLASH PLAYER插件
+		PackageManager pm = context.getPackageManager();
+		List<PackageInfo> lsPackageInfo = pm.getInstalledPackages(0);
+
+		for (PackageInfo pi : lsPackageInfo) {
+			if (pi.packageName.contains("com.adobe.flashplayer")) {
+				hasAdobePlayer = true;
+				break;
+			}
+		}
+		// 如果插件安装一切正常
+		if (hasAdobePlayer == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	
 }
