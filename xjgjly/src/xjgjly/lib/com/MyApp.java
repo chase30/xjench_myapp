@@ -65,7 +65,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MyApp extends Application {
-	public static final String Host="http://218.195.213.183:8080/lib_xjench/";
+	public static final String Host="http://115.28.183.213:8080/lib_xjench/";
 	public static final String AddUrl="http://www.xjench.com"; 
 	private static MyApp myApp;
 	public static final String TAG ="MyApp";
